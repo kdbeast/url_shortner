@@ -8,7 +8,7 @@ export const createShortUrlWithoutUser = async (url) => {
     throw new Error("Short URL is required");
   }
 
-  const result = await saveShortUrl("Y_4VcH4", url);
+  const result = await saveShortUrl(shortUrl, url);
   return result;
 };
 

@@ -1,20 +1,21 @@
 import { useState } from "react";
 // import { queryClient } from "../main";
 // import { useSelector } from "react-redux";
-// import { createShortUrl } from "../api/shortUrl.api";
+import { createShortUrl } from "../api/shortUrl.api";
 
 const UrlForm = () => {
   const [url, setUrl] = useState("https://www.google.com");
   const [shortUrl, setShortUrl] = useState();
   const [copied, setCopied] = useState(false);
   const [error, setError] = useState(null);
-//   const [customSlug, setCustomSlug] = useState("");
+  //   const [customSlug, setCustomSlug] = useState("");
   // const { isAuthenticated } = useSelector((state) => state.auth);
 
   const handleSubmit = async () => {
     try {
-      // const shortUrl = await createShortUrl(url, customSlug);
+      const shortUrl = await createShortUrl(url);
       setShortUrl(shortUrl);
+      console.log(shortUrl);
       // queryClient.invalidateQueries({ queryKey: ["userUrls"] });
       setError(null);
     } catch (err) {
@@ -42,12 +43,12 @@ const UrlForm = () => {
           Enter your URL
         </label>
         <input
-          type="url"
           id="url"
-          value={url}
-          onInput={(event) => setUrl(event.target.value)}
-          placeholder="https://example.com"
           required
+          type="url"
+          value={url}
+          placeholder="https://example.com"
+          onInput={(event) => setUrl(event.target.value)}
           className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
       </div>
