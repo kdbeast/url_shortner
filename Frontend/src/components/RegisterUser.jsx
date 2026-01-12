@@ -41,7 +41,7 @@ const RegisterForm = ({ state }) => {
     <div className="w-full max-w-md mx-auto">
       <div
         onSubmit={handleSubmit}
-        className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+        className="shadow-md rounded px-8 pt-6 pb-8 mb-4 bg-gray-700 text-white"
       >
         <h2 className="text-2xl font-bold text-center mb-6">
           Create an Account
@@ -55,13 +55,13 @@ const RegisterForm = ({ state }) => {
 
         <div className="mb-4">
           <label
-            className="block text-gray-700 text-sm font-bold mb-2"
+            className="block text-sm font-bold mb-2"
             htmlFor="name"
           >
             Full Name
           </label>
           <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline text-white"
             id="name"
             type="text"
             placeholder="Full Name"
@@ -73,13 +73,13 @@ const RegisterForm = ({ state }) => {
 
         <div className="mb-4">
           <label
-            className="block text-gray-700 text-sm font-bold mb-2"
+            className="block text-sm font-bold mb-2 "
             htmlFor="email"
           >
             Email
           </label>
           <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline text-white"
             id="email"
             type="email"
             placeholder="Email"
@@ -91,13 +91,13 @@ const RegisterForm = ({ state }) => {
 
         <div className="mb-4">
           <label
-            className="block text-gray-700 text-sm font-bold mb-2"
+            className="block text-sm font-bold mb-2"
             htmlFor="password"
           >
             Password
           </label>
           <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline text-white"
             id="password"
             type="password"
             placeholder="******************"
@@ -122,7 +122,7 @@ const RegisterForm = ({ state }) => {
         </div>
 
         <div className="text-center mt-4">
-          <p className="cursor-pointer text-sm text-gray-600">
+          <p className="cursor-pointer text-sm text-white">
             Already have an account?{" "}
             <span
               onClick={() => state(true)}

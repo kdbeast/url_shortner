@@ -8,11 +8,12 @@ import { NotFoundError, BadRequestError } from "../utils/errorHandler.js";
 
 export const createShortUrl = wrapAsync(async (req, res) => {
   const data = req.body;
+  const slug = data.slug || data.customSlug;
   let shortUrl;
   if (req.user) {
-    shortUrl = await createShortUrlWithUser(data.url, req.user._id, data.slug);
+    shortUrl = await createShortUrlWithUser(data.url, req.user._id, slug);
   } else {
-    shortUrl = await createShortUrlWithoutUser(data.url, data.slug);
+    shortUrl = await createShortUrlWithoutUser(data.url);
   }
   return res.status(201).send({ shortUrl: process.env.APP_URL + shortUrl });
 });
@@ -25,8 +26,7 @@ export const redirectFromShortUrl = wrapAsync(async (req, res) => {
 });
 
 export const createCustomShortUrl = wrapAsync(async (req, res) => {
-  const data = req.body;
-  if (!data.url) throw new BadRequestError("URL is required");
-  const shortUrl = createShortUrlWithUser(data.url, req.user._id, data.slug);
+  const { url, customSlug } = req.body;
+  const shortUrl = await createShortUrlWithUser(url, customSlug);
   return res.status(201).send({ shortUrl: process.env.APP_URL + shortUrl });
 });

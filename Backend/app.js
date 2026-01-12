@@ -2,6 +2,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import express from "express";
 import cookieParser from "cookie-parser";
+import userRoute from "./src/routes/user.route.js";
 import authRoute from "./src/routes/auth.route.js";
 import { attachUser } from "./src/utils/attachUser.js";
 import connectDB from "./src/config/mongoose.config.js";
@@ -19,6 +20,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 app.use(attachUser);
+app.use("/api/", userRoute);
 app.use("/api/auth", authRoute);
 app.use("/api/create", shortUrlRoute);
 app.get("/:id", redirectFromShortUrl);

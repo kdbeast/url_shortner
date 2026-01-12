@@ -13,11 +13,13 @@ export const saveShortUrl = async (shortUrl, longUrl, userId) => {
     }
 
     await newUrl.save();
+    return shortUrl;
   } catch (error) {
-    if (error.code === 11000)
+    if (error.code === 11000) {
       throw new ConflictError("Custom URL already exists");
+    }
+    throw new Error(error.message);
   }
-  throw new Error(error.message);
 };
 
 export const getShortUrl = async (shortUrl) => {

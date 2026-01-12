@@ -1,13 +1,14 @@
 import axiosInstance from "../utils/axiosInstance";
 
-export const createShortUrl = async (url) => {
+export const createShortUrl = async (url, customSlug) => {
   try {
     const { data } = await axiosInstance.post("/create", {
       url,
+      slug: customSlug,
     });
-    return data.ShortUrl;
+    return data.shortUrl;
   } catch (error) {
-    console.error("Error creating short URL:", error);
+    console.error("Error creating short URL");
     throw error;
   }
 };

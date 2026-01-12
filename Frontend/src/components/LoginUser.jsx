@@ -30,7 +30,7 @@ const LoginForm = ({ state }) => {
 
   return (
     <div className="w-full max-w-md mx-auto">
-      <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+      <div className="shadow-md rounded px-8 pt-6 pb-8 mb-4 bg-gray-700 text-white">
         <h2 className="text-2xl font-bold text-center mb-6">Login</h2>
 
         {error && (
@@ -41,13 +41,13 @@ const LoginForm = ({ state }) => {
 
         <div className="mb-4">
           <label
-            className="block text-gray-700 text-sm font-bold mb-2"
+            className="block text-sm font-bold mb-2 text-white"
             htmlFor="email"
           >
             Email
           </label>
           <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-white"
             id="email"
             type="email"
             placeholder="Email"
@@ -59,13 +59,13 @@ const LoginForm = ({ state }) => {
 
         <div className="mb-6">
           <label
-            className="block text-gray-700 text-sm font-bold mb-2"
+            className="block text-sm font-bold mb-2 text-white"
             htmlFor="password"
           >
             Password
           </label>
           <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-white"
             id="password"
             type="password"
             placeholder="******************"
@@ -89,7 +89,7 @@ const LoginForm = ({ state }) => {
         </div>
 
         <div className="text-center mt-4">
-          <p className="cursor-pointer text-sm text-gray-600">
+          <p className="cursor-pointer text-sm text-white">
             Don't have an account?{" "}
             <span
               onClick={() => state(false)}
