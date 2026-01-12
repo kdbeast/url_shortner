@@ -15,7 +15,7 @@ export const registerService = async (name, email, password) => {
 };
 
 export const loginService = async (email, password) => {
-  const user = await findUserByEmail(email);
+  const user = await findUserByEmail(email, true);
 
   if (!user || user.password !== password)
     throw new UnauthorizedError("Invalid credentials");

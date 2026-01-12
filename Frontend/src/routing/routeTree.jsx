@@ -3,6 +3,7 @@ import HomePage from "../pages/HomePage";
 import AuthPage from "../pages/AuthPage";
 import Dashboard from "../pages/Dashboard";
 import { createRootRoute, createRoute } from "@tanstack/react-router";
+import { checkAuth } from "../utils/helper";
 
 export const rootRoute = createRootRoute({
   component: App,
@@ -24,6 +25,7 @@ export const dashboardRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/dashboard",
   component: Dashboard,
+  beforeLoad: checkAuth,
 });
 
 export const routeTree = rootRoute.addChildren([

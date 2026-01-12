@@ -1,18 +1,16 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { loginUser } from "../api/user.api";
-// import { login } from "../store/slice/authSlice.js";
-// import { useNavigate } from "@tanstack/react-router";
-// import { useDispatch, useSelector } from "react-redux";
+import { login } from "../store/slice/authSlice.js";
+import { useNavigate } from "@tanstack/react-router";
 
 const LoginForm = ({ state }) => {
-  const [email, setEmail] = useState("kd@gmail.com");
-  const [password, setPassword] = useState("12345");
-  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [error, setError] = useState("");
-//   const navigate = useNavigate();
-//   const dispatch = useDispatch();
-//   const auth = useSelector((state) => state.auth);
-//   console.log(auth);
+  const [loading, setLoading] = useState(false);
+  const [password, setPassword] = useState("12345");
+  const [email, setEmail] = useState("kd@gmail.com");
 
   const handleSubmit = async () => {
     setLoading(true);
@@ -20,10 +18,10 @@ const LoginForm = ({ state }) => {
 
     try {
       const data = await loginUser(password, email);
-    //   dispatch(login(data.user));
-    //   navigate({ to: "/dashboard" });
+      dispatch(login(data.user));
+      navigate({ to: "/dashboard" });
       setLoading(false);
-      console.log("signin success",data);
+      console.log("signin success", data);
     } catch (err) {
       setLoading(false);
       setError(err.message || "Login failed. Please check your credentials.");

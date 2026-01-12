@@ -1,17 +1,17 @@
 import { useState } from "react";
 import { registerUser } from "../api/user.api";
-// import { useDispatch } from "react-redux";
-// import { login } from "../store/slice/authSlice";
-// import { useNavigate } from "@tanstack/react-router";
+import { useDispatch } from "react-redux";
+import { login } from "../store/slice/authSlice";
+import { useNavigate } from "@tanstack/react-router";
 
 const RegisterForm = ({ state }) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [error, setError] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
-//   const dispatch = useDispatch();
-//   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -26,10 +26,10 @@ const RegisterForm = ({ state }) => {
 
     try {
       const data = await registerUser(name, password, email);
-    //   setLoading(false);
-    //   dispatch(login(data.user));
-    //   navigate({ to: "/dashboard" });
-      console.log("signup success",data);
+      setLoading(false);
+      dispatch(login(data.user));
+      navigate({ to: "/dashboard" });
+      console.log("signup success", data);
       setLoading(false);
     } catch (err) {
       setLoading(false);

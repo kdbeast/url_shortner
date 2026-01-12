@@ -1,7 +1,22 @@
-import React from "react";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { logoutUser } from "../api/user.api";
 import { Link } from "@tanstack/react-router";
+import { logout } from "../store/slice/authSlice";
+import { useNavigate } from "@tanstack/react-router";
 
 const Navbar = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const user = useSelector((state) => state.auth.user);
+  const isLoggedIn = useSelector((state) => state.auth.isAuthenticated);
+
+  const onLogout = () => {
+    logoutUser();
+    dispatch(logout());
+    navigate({ to: "/auth" });
+  };
+
   return (
     <nav className="bg-white border border-b-black">
       <div className=" mx-auto px-4 sm:px-6 lg:px-8">
@@ -15,9 +30,14 @@ const Navbar = () => {
 
           {/* Right side - Auth buttons */}
           <div className="flex items-center">
-            {/* {(true) ? (
+            {isLoggedIn ? (
               <div className="flex items-center space-x-4">
-                <span className="text-gray-700">Welcome, {userName || 'User'}</span>
+                <span className="text-gray-700">
+                  Welcome, {user?.name || "User"}
+                </span>
+                {user?.avatar && (
+                  <img className="w-10 h-10 rounded-full" src={user?.avatar} alt="" />
+                )}
                 <button
                   onClick={onLogout}
                   className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md text-sm font-medium"
@@ -30,9 +50,9 @@ const Navbar = () => {
                 to="/auth"
                 className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-medium"
               >
-                Login
+                Get Started
               </Link>
-            )} */}
+            )}
           </div>
         </div>
       </div>
