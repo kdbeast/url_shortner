@@ -13,7 +13,7 @@ dotenv.config(); // Simplified config call
 
 const app = express();
 
-app.use(cors());
+app.use(cors({ origin: "http://localhost:5174", credentials: true }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
