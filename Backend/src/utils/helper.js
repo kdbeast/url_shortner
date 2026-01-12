@@ -6,10 +6,9 @@ export const generateNanoId = (length) => {
 };
 
 export const signToken = (id) => {
-  return jwt.sign(id, process.env.JWT_SECRET, { expiresIn: "5m" });
+  return jwt.sign(id, process.env.JWT_SECRET, { expiresIn: "1h" });
 };
 
 export const verifyToken = (token) => {
-  const decoded = jwt.verify(token, process.env.JWT_SECRET);
-  console.log(decoded.id);
+  return jwt.verify(token, process.env.JWT_SECRET);
 };

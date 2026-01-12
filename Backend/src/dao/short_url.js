@@ -8,19 +8,16 @@ export const saveShortUrl = async (shortUrl, longUrl, userId) => {
       short_url: shortUrl,
     });
 
-    if (!shortUrl || !longUrl) {
-      throw new Error("Short URL and Long URL are required");
-    }
-
     if (userId) {
-      newUrl.user_id = userId;
+      newUrl.user = userId;
     }
 
     await newUrl.save();
-    return shortUrl;
   } catch (error) {
-    throw new ConflictError(error.message);
+    if (error.code === 11000)
+      throw new ConflictError("Custom URL already exists");
   }
+  throw new Error(error.message);
 };
 
 export const getShortUrl = async (shortUrl) => {
@@ -28,5 +25,10 @@ export const getShortUrl = async (shortUrl) => {
     { short_url: shortUrl },
     { $inc: { clicks: 1 } }
   );
+  return url;
+};
+
+export const getCustomShortUrl = async (slug) => {
+  const url = await urlSchema.findOne({ short_url: slug });
   return url;
 };

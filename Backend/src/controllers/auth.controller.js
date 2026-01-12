@@ -9,7 +9,7 @@ export const register = wrapAsync(async (req, res) => {
     return res.status(400).json({ message: "All fields are required" });
   }
 
-  const token = await registerService(name, email, password);
+  const { token } = await registerService(name, email, password);
 
   res.cookie("accessToken", token, cookieOptions);
 
@@ -23,9 +23,9 @@ export const login = wrapAsync(async (req, res) => {
     return res.status(400).json({ message: "All fields are required" });
   }
 
-  const token = await loginService(email, password);
+  const { token, user } = await loginService(email, password);
 
   res.cookie("accessToken", token, cookieOptions);
 
-  res.status(201).json({ token, message: "User logged in successfully" });
+  res.status(201).json({ token, user, message: "User logged in successfully" });
 });

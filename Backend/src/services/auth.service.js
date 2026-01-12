@@ -11,7 +11,7 @@ export const registerService = async (name, email, password) => {
   const newUser = await createUser(name, email, password);
 
   const token = signToken({ id: newUser._id });
-  return token;
+  return { token, user: newUser };
 };
 
 export const loginService = async (email, password) => {
@@ -21,5 +21,5 @@ export const loginService = async (email, password) => {
     throw new UnauthorizedError("Invalid credentials");
 
   const token = signToken({ id: user._id });
-  return token;
+  return { token, user };
 };
