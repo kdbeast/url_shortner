@@ -31,12 +31,12 @@ const Navbar = () => {
           {/* Right side - Auth buttons */}
           <div className="flex items-center">
             {isLoggedIn ? (
-              <div className="flex items-center space-x-4">
+              <div className="flex items-center space-x-4 sm:space-x-2">
                 <span className="text-gray-700">
                   Welcome, {user?.name || "User"}
                 </span>
                 {user?.avatar && (
-                  <img className="w-10 h-10 rounded-full" src={user?.avatar} alt="" />
+                  <img className="w-10 h-10 rounded-full hidden sm:block" src={user?.avatar} alt="avatar" />
                 )}
                 <button
                   onClick={onLogout}
