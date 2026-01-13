@@ -4,6 +4,7 @@ import { cookieOptions } from "../config/config.js";
 import { loginService, registerService } from "../services/auth.service.js";
 
 export const register = wrapAsync(async (req, res) => {
+  console.log("here in register", req.body);
   const { name, email, password } = req.body;
   const { user, token } = await registerService(name, email, password);
   req.user = user;
