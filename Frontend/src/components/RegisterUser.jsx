@@ -16,10 +16,15 @@ const RegisterForm = ({ state }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (password.length < 6) {
-      setError("Password must be at least 6 characters long");
-      return;
-    }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$/;
+
+    if (!emailRegex.test(email)) setError("Invalid email format");
+
+    if (!passwordRegex.test(password))
+      setError(
+        "Password must be minimum 8 characters and contain letters & numbers"
+      );
 
     setLoading(true);
     setError("");
@@ -54,10 +59,7 @@ const RegisterForm = ({ state }) => {
         )}
 
         <div className="mb-4">
-          <label
-            className="block text-sm font-bold mb-2"
-            htmlFor="name"
-          >
+          <label className="block text-sm font-bold mb-2" htmlFor="name">
             Full Name
           </label>
           <input
@@ -68,14 +70,12 @@ const RegisterForm = ({ state }) => {
             value={name}
             onChange={(e) => setName(e.target.value)}
             required
+            minLength={3}
           />
         </div>
 
         <div className="mb-4">
-          <label
-            className="block text-sm font-bold mb-2 "
-            htmlFor="email"
-          >
+          <label className="block text-sm font-bold mb-2 " htmlFor="email">
             Email
           </label>
           <input
@@ -86,14 +86,12 @@ const RegisterForm = ({ state }) => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
+            disabled={loading}
           />
         </div>
 
         <div className="mb-4">
-          <label
-            className="block text-sm font-bold mb-2"
-            htmlFor="password"
-          >
+          <label className="block text-sm font-bold mb-2" htmlFor="password">
             Password
           </label>
           <input
@@ -105,6 +103,7 @@ const RegisterForm = ({ state }) => {
             onChange={(e) => setPassword(e.target.value)}
             required
             minLength={6}
+            disabled={loading}
           />
         </div>
 

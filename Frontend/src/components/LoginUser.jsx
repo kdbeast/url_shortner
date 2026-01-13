@@ -54,6 +54,7 @@ const LoginForm = ({ state }) => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
+            disabled={loading}
           />
         </div>
 
@@ -72,6 +73,7 @@ const LoginForm = ({ state }) => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
+            disabled={loading}
           />
         </div>
 

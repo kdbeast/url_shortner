@@ -27,6 +27,6 @@ export const redirectFromShortUrl = wrapAsync(async (req, res) => {
 
 export const createCustomShortUrl = wrapAsync(async (req, res) => {
   const { url, customSlug } = req.body;
-  const shortUrl = await createShortUrlWithUser(url, customSlug);
+  const shortUrl = await createShortUrlWithUser(url, req.user?._id, customSlug);
   return res.status(201).send({ shortUrl: process.env.APP_URL + shortUrl });
 });

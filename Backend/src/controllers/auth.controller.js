@@ -1,19 +1,12 @@
-import bcrypt from "bcrypt";
 import wrapAsync from "../utils/tryCatchWrapper.js";
 import { cookieOptions } from "../config/config.js";
 import { loginService, registerService } from "../services/auth.service.js";
 
 export const register = wrapAsync(async (req, res) => {
-  console.log("here in register", req.body);
   const { name, email, password } = req.body;
   const { user, token } = await registerService(name, email, password);
-  console.log('user created', user, token)
   req.user = user;
   res.cookie("accessToken", token, cookieOptions);
-
-  // bycrypt the password
-  const hashedPassword = await bcrypt.hash(password, 10);
-  user.password = hashedPassword;
 
   await user.save();
 
