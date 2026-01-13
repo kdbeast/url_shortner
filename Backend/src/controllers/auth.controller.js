@@ -7,6 +7,7 @@ export const register = wrapAsync(async (req, res) => {
   console.log("here in register", req.body);
   const { name, email, password } = req.body;
   const { user, token } = await registerService(name, email, password);
+  console.log('user created', user, token)
   req.user = user;
   res.cookie("accessToken", token, cookieOptions);
 
